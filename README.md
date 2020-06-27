@@ -106,11 +106,11 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | How can we represent the system in an **architecture diagram**, which gives information both about the Docker containers, the communication protocols and the commands? |
 | | *Insert your diagram here...* |
 |Question | Who is going to **send UDP datagrams** and **when**? |
-| | *Enter your response here...* |
+| | Les musiciens, toutes les secondes |
 |Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received? |
-| | *Enter your response here...* |
+| | L'auditeur, il actualisera une liste de musiciens contenant toutes les informations sur ces derniers (id, instrument(s), date de dernière action, etc) |
 |Question | What **payload** should we put in the UDP datagrams? |
-| | *Enter your response here...* |
+| | L'id du musicien et son instrument |
 |Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures? |
 | | *Enter your response here...* |
 
@@ -120,11 +120,11 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | In a JavaScript program, if we have an object, how can we **serialize it in JSON**? |
-| | *Enter your response here...*  |
+| | En faisant : ```JSON.stringify(object);```  |
 |Question | What is **npm**?  |
-| | *Enter your response here...*  |
+| | Il s'agit d'un gestionnaire de paquets. C'est un outil similaire à **Maven** dans les grandes lignes. Il s'occupera de gérer le projet **JS**.  |
 |Question | What is the `npm install` command and what is the purpose of the `--save` flag?  |
-| | *Enter your response here...*  |
+| | ```npm install``` : permet d'ajouter un paquet\ ```--save``` : permet d'ajouter le paquet donné à l'arborescence des dépendances.  |
 |Question | How can we use the `https://www.npmjs.com/` web site?  |
 | | *Enter your response here...*  |
 |Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122? |
