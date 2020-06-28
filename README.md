@@ -106,13 +106,13 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | How can we represent the system in an **architecture diagram**, which gives information both about the Docker containers, the communication protocols and the commands? |
 | | *Insert your diagram here...* |
 |Question | Who is going to **send UDP datagrams** and **when**? |
-| | Les musiciens, toutes les secondes |
+| | *Each musician will send an UDP diagram containing his uuid and instrument sound. They will do so every second.* |
 |Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received? |
-| | L'auditeur, il actualisera une liste de musiciens contenant toutes les informations sur ces derniers (id, instrument(s), date de dernière action, etc) |
+| | *The auditor. When he receive a datagram, he will compare the uudi to his disctionnary of musicians. If they are not in it, he will create an entry containing instrument, creation date and last heard date. If they are already in it, the auditor will update the last heard date to the current time.* |
 |Question | What **payload** should we put in the UDP datagrams? |
-| | L'id du musicien et son instrument |
+| | *At least the musician's uuid, and either his instrument, the sound it makes or both* |
 |Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures? |
-| | *Enter your response here...* |
+| | *The musician (sender) doesn't really need any data structure, except when building his json payload to send. The auditor (receiver), on the other hand, definilety needs a dictionnary containing heard musicians stored by uuid as key. He will update this data structure every time a musician a new musician is heard, every time a musician is heard again and every time a musician hasn't been heard in 5 seconds. We will query this data structure each time we connect to the auditor by TCP.* |
 
 
 ## Task 2: implement a "musician" Node.js application
@@ -160,15 +160,15 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | ---  |
 |Question | With Node.js, how can we listen for UDP datagrams in a multicast group? |
-| | *Enter your response here...*  |
+| | *After declaring an udp4 socket, we can bind it to the correct port using udpSocket.bind(port, function() and subscribe to the multicast group address using udpSocket.addMembership(address);*  |
 |Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**?  |
-| | *Enter your response here...* |
+| | *A Map binds keys and values together. By using a musician's uuid as a key and his instrument and time information as values, we can retrieve those informations by knowing the uuid, using map.has(key), map.get(key) and map.set(key, value), which is a disctionary* |
 |Question | How can we use the `Moment.js` npm module to help us with **date manipulations** and formatting?  |
-| | *Enter your response here...* |
+| | *Moment.js lets us have readable date representations using moment().format() and store them as data. It also lets us get the difference between these representations and returns it to us as milliseconds, which we can use to measure elapsed time. Finally, the date are shown in UTC.* |
 |Question | When and how do we **get rid of inactive players**?  |
-| | *Enter your response here...* |
+| | *Every so often, we have to check every player registered for the last time we heard them. If that time is bigger than a constant, 5000 milliseconds in our case, we remove them from our dictionary. We chose to do this check every second for more theoretical accuracy, but we could have done this every 5 seconds, or even only when somebody requests the musicians to the auditor by TCP.* |
 |Question | How do I implement a **simple TCP server** in Node.js?  |
-| | *Enter your response here...* |
+| | *By using net with net.createServer(), we can easily create a TCP server on which we can define actions. By using tcpServer.listen(port), we listen for incoming connection on a specific port. By using tcpServer.on('connection', function(socket)), we can define what to do on a client initial connection. In our case, we send what we know about the orchestra with socket.write.* |
 
 
 ## Task 5: package the "auditor" app in a Docker image
@@ -176,7 +176,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | How do we validate that the whole system works, once we have built our Docker image? |
-| | *Enter your response here...* |
+| | *We validated our system the following way: We first launch one auditor container in foreground mode to see what is printed. We see that as expected, no music is heard. We can the launch several musician containers and see on the auditor container that it can effectively hear different musicians. Finally, we can use netcat to connect via TCP to our auditor and he will give us a list of musicians he heard in the last 5 seconds. We can then kill 1 by 1 the musicians and connect to the auditor again using netcat and see that the list grows shorter each time, removing the musician that we killed. By using the validate.sh script, we also had better confirmation that our system was correct.* |
 
 
 ## Constraints
