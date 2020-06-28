@@ -1,6 +1,6 @@
 // Network infos
-exports.multicastAddress = "239.1.1.100"
-exports.port             = 9009
+exports.multicastAddress = "239.255.22.5"
+exports.port             = 9907
 exports.interval         = 1000
 
 // Instruments

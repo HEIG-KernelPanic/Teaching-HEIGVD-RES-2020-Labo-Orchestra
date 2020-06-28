@@ -2,6 +2,9 @@
 
 const dgram = require('dgram');
 
+const { v4: uuidv4 } = require('uuid');
+const uuid = uuidv4();
+
 // Import global variables
 const global = require('./global.js');
 
@@ -15,17 +18,17 @@ function sendMusic() {
 	const payload = JSON.stringify({
 		"instrument" : instrument,
         "sound"      : global.instruments[instrument],
-        "uuid"       : uuidv4
+        "uuid"       : uuid
     });
 
-    server.send(payload, payload.length, global.port, global.multicastAddress, function() {
-        console.log("Sent " + payload);
+    server.send(payload, 0, payload.length, global.port, global.multicastAddress, function() {
+        console.log("Sent " + payload + "\n");
     });
 
 }
 
-if (! global.instruments.has(instrument)) {
-    console.log('I don\'t know this instrument...');
+if (! global.instruments[instrument]) {
+    console.log('I don\'t know this instrument...' + instrument);
     process.exit(1);
 } else {
 	setInterval(sendMusic, global.interval);

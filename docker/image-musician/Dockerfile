@@ -10,4 +10,4 @@ WORKDIR /opt/app
 RUN npm install
 
 # Run the app
-CMD ["node", "index.js"]
+ENTRYPOINT ["node", "index.js"]
