@@ -124,7 +124,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | What is **npm**?  |
 | | *It is a package manager. It is a tool kind of similar to **Maven** that will manage the **JS** project.* |
 |Question | What is the `npm install` command and what is the purpose of the `--save` flag?  |
-| | *```npm install``` : is used to add a package\ ```--save``` : is used to add the given package to the dependency tree.* |
+| | *```npm install``` : is used to add and install a package and any package it depends on\ ```--save``` : is used to add the given package to the dependency tree.* |
 |Question | How can we use the `https://www.npmjs.com/` web site?  |
 | | *This site is similar to *Docker Hub*, it can be used to search for packages, their documentation and the commands used to install them.* |
 |Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122? |
