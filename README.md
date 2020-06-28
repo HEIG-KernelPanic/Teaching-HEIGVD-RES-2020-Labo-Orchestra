@@ -112,7 +112,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | What **payload** should we put in the UDP datagrams? |
 | | *At least the musician's uuid, and either his instrument, the sound it makes or both* |
 |Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures? |
-| | *The musician (sender) doesn't really need any data structure, except when building his json payload to send. The auditor (receiver), on the other hand, definilety needs a dictionnary containing heard musicians stored by uuid as key. He will update this data structure every time a musician a new musician is heard, every time a musician is heard again and every time a musician hasn't been heard in 5 seconds. We will query this data structure each time we connect to the auditor by TCP.* |
+| | *We will use one `Map` in order to link each instrument to its' sound  on the musician side. The first `Map` is not to be updated. The auditor (receiver), on the other hand, needs a dictionnary containing heard musicians stored by uuid as key. He will update this data structure every time a musician a new musician is heard, every time a musician is heard again and every time a musician hasn't been heard in 5 seconds. We will query this data structure each time we connect to the auditor by TCP.* |
 
 
 ## Task 2: implement a "musician" Node.js application
@@ -120,21 +120,21 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | In a JavaScript program, if we have an object, how can we **serialize it in JSON**? |
-| | En faisant : ```JSON.stringify(object);```  |
+| | *By using the following command : ```JSON.stringify(object);```*  |
 |Question | What is **npm**?  |
-| | Il s'agit d'un gestionnaire de paquets. C'est un outil similaire à **Maven** dans les grandes lignes. Il s'occupera de gérer le projet **JS**.  |
+| | *It is a package manager. It is a tool kind of similar to **Maven** that will manage the **JS** project.* |
 |Question | What is the `npm install` command and what is the purpose of the `--save` flag?  |
-| | ```npm install``` : permet d'ajouter un paquet\ ```--save``` : permet d'ajouter le paquet donné à l'arborescence des dépendances.  |
+| | *```npm install``` : is used to add a package\ ```--save``` : is used to add the given package to the dependency tree.* |
 |Question | How can we use the `https://www.npmjs.com/` web site?  |
-| | *Enter your response here...*  |
+| | *This site is similar to *Docker Hub*, it can be used to search for packages, their documentation and the commands used to install them.* |
 |Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122? |
-| | *Enter your response here...*  |
+| | *With the **uuid** package. We used the *uuidv4* function for its' random ID generator.* |
 |Question | In Node.js, how can we execute a function on a **periodic** basis? |
-| | *Enter your response here...*  |
+| | *With the following instruction : ```setInterval(`functionToExecutePeriodically`, waitingTimeInMilliseconds);```* |
 |Question | In Node.js, how can we **emit UDP datagrams**? |
-| | *Enter your response here...*  |
+| | *With the **dgram** package and a UDP socket. We use the ```send``` method to which we give the message to send and the needed information (message length, port, id address etc) in order to send the **UDP datagram** version of the given payload.* |
 |Question | In Node.js, how can we **access the command line arguments**? |
-| | *Enter your response here...*  |
+| | *By doing the following command : ```const someVariable = process.argv[x];``` (in this case, ```x``` is the index of the argument needed for the variable)* |
 
 
 ## Task 3: package the "musician" app in a Docker image
@@ -142,17 +142,17 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | How do we **define and build our own Docker image**?|
-| | *Enter your response here...*  |
+| | *By creating a Dockerfile with the information we need from a chosen image and by adding some files if needed, and then by using the following command : ```docker build -t <image name> .```*  |
 |Question | How can we use the `ENTRYPOINT` statement in our Dockerfile?  |
-| | *Enter your response here...*  |
+| | *It is similar to the `CMD`statemtent, exept it allows the container to be run as an executable (which can take starting arguments)*  |
 |Question | After building our Docker image, how do we use it to **run containers**?  |
-| | *Enter your response here...*  |
+| | *With the following command : ```docker run <image name>```*  |
 |Question | How do we get the list of all **running containers**?  |
-| | *Enter your response here...*  |
+| | *By using the ```docker ps``` command.*  |
 |Question | How do we **stop/kill** one running container?  |
-| | *Enter your response here...*  |
+| | *``` docker stop <container id or name> ``` or ``` docker kill <container id or name> ```*  |
 |Question | How can we check that our running containers are effectively sending UDP datagrams?  |
-| | *Enter your response here...*  |
+| | *By using WireShark or any other traffic sniffer.*  |
 
 
 ## Task 4: implement an "auditor" Node.js application
