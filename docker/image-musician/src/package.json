@@ -1,0 +1,9 @@
+{
+	"name" : "musician",
+	"version" : "1.0",
+	"main" : "index.json",
+	"scripts" : {
+		"test" : "echo \"Error: no test\" && exit 1"
+	},
+	"authors" : "Matthieu Burguburu et Clarisse Fleurimont"
+}
