@@ -106,13 +106,13 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | How can we represent the system in an **architecture diagram**, which gives information both about the Docker containers, the communication protocols and the commands? |
 | | *Insert your diagram here...* |
 |Question | Who is going to **send UDP datagrams** and **when**? |
-| | Les musiciens, toutes les secondes |
+| | The musicians, every second. |
 |Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received? |
-| | L'auditeur, il actualisera une liste de musiciens contenant toutes les informations sur ces derniers (id, instrument(s), date de dernière action, etc) |
+| | The auditor, it will actualize a list of musicians. |
 |Question | What **payload** should we put in the UDP datagrams? |
-| | L'id du musicien et son instrument |
+| | The musicians' uuid, his instrument and the corresponding sound. |
 |Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures? |
-| | *Enter your response here...* |
+| | We will use one `Map` in order to link each instrument to its' sound (musician) and another to link a uuid to an instrument and timstamps (auditor). The first `Map` is not to be updated but the second will be, each time a sound is received by the auditor. |
 
 
 ## Task 2: implement a "musician" Node.js application
@@ -120,21 +120,21 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | In a JavaScript program, if we have an object, how can we **serialize it in JSON**? |
-| | En faisant : ```JSON.stringify(object);```  |
+| | By using the following command : ```JSON.stringify(object);```  |
 |Question | What is **npm**?  |
-| | Il s'agit d'un gestionnaire de paquets. C'est un outil similaire à **Maven** dans les grandes lignes. Il s'occupera de gérer le projet **JS**.  |
+| | It is a package manager. It is a tool kind of similar to **Maven** that will manage the **JS** project.  |
 |Question | What is the `npm install` command and what is the purpose of the `--save` flag?  |
-| | ```npm install``` : permet d'ajouter un paquet\ ```--save``` : permet d'ajouter le paquet donné à l'arborescence des dépendances.  |
+| | ```npm install``` : is used to add a package\ ```--save``` : is used to add the given package to the dependency tree.  |
 |Question | How can we use the `https://www.npmjs.com/` web site?  |
-| | *Enter your response here...*  |
+| | This site is similar to *Docker Hub*, it can be used to search for packages, their documentation and the commands used to install them.  |
 |Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122? |
-| | *Enter your response here...*  |
+| | With the **uuid** package. We used the *uuidv4* function for its' random ID generator. |
 |Question | In Node.js, how can we execute a function on a **periodic** basis? |
-| | *Enter your response here...*  |
+| | With the following instruction : ```setInterval(`functionToExecutePeriodically`, waitingTimeInMilliseconds);``  |
 |Question | In Node.js, how can we **emit UDP datagrams**? |
-| | *Enter your response here...*  |
+| | With the **dgram** package and a UDP socket. We use the ```send``` method to which we give the message to send and the needed information (message length, port, id address etc) in order to send the **UDP datagram** version of the given payload.  |
 |Question | In Node.js, how can we **access the command line arguments**? |
-| | *Enter your response here...*  |
+| | By doing the following command : ```const someVariable = process.argv[x];``` (in this case, ```x``` is the index of the argument needed for the variable) |
 
 
 ## Task 3: package the "musician" app in a Docker image
