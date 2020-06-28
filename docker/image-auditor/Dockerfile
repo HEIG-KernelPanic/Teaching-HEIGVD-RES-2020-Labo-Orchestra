@@ -1,9 +1,12 @@
 FROM node:12.16.3
 
+# Set workdir
 WORKDIR /opt/app/
 
 COPY src/ ./
 
+# Install dependencies with npm
 RUN npm install
 
-CMD ["node", "auditor.js"]
+# Run the app
+ENTRYPOINT ["node", "auditor.js"]

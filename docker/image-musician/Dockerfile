@@ -1,13 +1,12 @@
-FROM node:14
+FROM node:12.16.3
 
-RUN apt-get update && apt-get install -y vim
-COPY src/ /opt/app
-
-# Create directory for the app
+# Set workdir
 WORKDIR /opt/app
+
+COPY src/ ./
 
 # Install dependencies with npm
 RUN npm install
 
 # Run the app
-ENTRYPOINT ["node", "index.js"]
+ENTRYPOINT ["node", "musician.js"]

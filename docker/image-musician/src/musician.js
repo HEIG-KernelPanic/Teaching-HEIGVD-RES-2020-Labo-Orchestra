@@ -6,33 +6,33 @@ const { v4: uuidv4 } = require('uuid');
 const uuid = uuidv4();
 
 // Import global variables
-const global = require('./global.js');
+const protocol = require('./protocol.js');
 
-const server = dgram.createSocket('udp4');
+const udpSocket = dgram.createSocket('udp4');
 
 const instrument = process.argv[2];
 
+udpSocket.bind(protocol.UDP_PORT);
+
 function sendMusic() {
-	console.log("Playing the " + instrument + " : " + global.instruments[instrument]);
+	console.log("Playing the " + instrument + " : " + protocol.INSTRUMENTS[instrument]);
 
 	const payload = JSON.stringify({
 		"instrument" : instrument,
-        "sound"      : global.instruments[instrument],
+        "sound"      : protocol.INSTRUMENTS[instrument],
         "uuid"       : uuid
     });
 
-    server.send(payload, 0, payload.length, global.port, global.multicastAddress, function() {
+    udpSocket.send(payload, 0, payload.length, protocol.UDP_PORT, protocol.UDP_ADDRESS, function() {
         console.log("Sent " + payload + "\n");
     });
 
 }
 
-if (! global.instruments[instrument]) {
+if (! protocol.INSTRUMENTS[instrument]) {
     console.log('I don\'t know this instrument...' + instrument);
     process.exit(1);
 } else {
-	setInterval(sendMusic, global.interval);
+	setInterval(sendMusic, protocol.PLAY_INTERVAL);
 }
-
-server.bind(global.port);
 
