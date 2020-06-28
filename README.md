@@ -104,7 +104,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | --- | --- |
 |Question | How can we represent the system in an **architecture diagram**, which gives information both about the Docker containers, the communication protocols and the commands? |
-| | *See diagram in the `image/` directory.* |
+| | ![architecture diagram](images/architecture_diagram.png) |
 |Question | Who is going to **send UDP datagrams** and **when**? |
 | | *Each musician will send an UDP diagram containing his uuid and instrument sound. They will do so every second.* |
 |Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received? |
