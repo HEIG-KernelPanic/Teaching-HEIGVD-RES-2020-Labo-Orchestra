@@ -9,8 +9,6 @@ const server = dgram.createSocket('udp4');
 
 const instrument = process.argv[2];
 
-server.setBroadcast(true);
-
 function sendMusic() {
 	console.log("Playing the " + instrument + " : " + global.instruments[instrument]);
 
@@ -26,7 +24,7 @@ function sendMusic() {
 
 }
 
-if (! global.interval.has(instrument)) {
+if (! global.instruments.has(instrument)) {
     console.log('I don\'t know this instrument...');
     process.exit(1);
 } else {
